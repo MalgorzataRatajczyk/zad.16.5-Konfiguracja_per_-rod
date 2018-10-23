@@ -12,28 +12,30 @@ module.exports = (env) => {
             path: path.resolve(__dirname, 'build'),
             filename: 'index.' + environment + '.bundle.js'
         },
+        module: {
+            rules: [
+                    {
+                    test: /\.js$/,
+                    loader: "babel-loader"
+                    },
+                    {
+                    test: /\.css$/,
+                    use: [
+                            {
+                            loader: 'style-loader'
+                            },
+                            {
+                            loader: 'css-loader',
+                            options: {
+                            modules: true
+                            }
+                        }
+                    ]
+                }
+            ]
+        } 
     }
     optimization: {
         minimize: false
-    }
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                loader: "babel-loader"
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    { loader: 'style-loader'},
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true
-                        }
-                    }
-                ]
-            }
-        ]
     } 
 };
